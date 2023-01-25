@@ -8,14 +8,6 @@ import ItemDetail from './components/ItemDetail';
 import CartContextProvider from './context/CartContext';
 
 function App() {
-  const [productos, setProductos] = useState({ products: [] })
-  
-  useEffect(() => {
-  fetch('https://dummyjson.com/products/')
-  .then((response) => response.json())
-  .then((json) => setProductos(json))
-  },[])
-  console.log({productos})
   return (
     <>
     <CartContextProvider>

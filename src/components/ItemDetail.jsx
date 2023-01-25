@@ -15,7 +15,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const ItemDetail = ({productos}) => {
+const ItemDetail = ({item}) => {
   const { id } = useParams();
   const {addItem} = useContext(CartContext);
   const [producto, setProducto] = useState({ products: [] })
@@ -28,26 +28,26 @@ const ItemDetail = ({productos}) => {
   },[id])  
 
   const onAdd = (quantity) =>{
-    addItem(productos, quantity);
+    addItem(item, quantity);
   }
 
   return (
     
   <div>
-       <h1>{producto.title}</h1>
+       <h1>{item.title}</h1>
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
         <Grid item xs={8}>
           <Item>
-          <img src={producto.thumbnail}/>
+          <img src={item.thumbnail}/>
           </Item>
         </Grid>
         <Grid item xs={4} 
         align='left'>
           <Item>
-          <h2>{producto.title}</h2>
-          <p>{producto.description}</p>
-          <h2>$ {producto.price}</h2>
+          <h2>{item.title}</h2>
+          <p>{item.description}</p>
+          <h2>$ {item.price}</h2>
   <Box>
         <Item>
         <ItemDetailButtons onAdd={onAdd} />

@@ -5,20 +5,27 @@ export const CartContext = createContext();
 
 
 const CartContextProvider = ({children}) => {
-    const [cart, setCart] = useState([]);
+    const [productos, setCart] = useState({ products: [] })
 
+    useEffect(() => {
+        fetch('https://dummyjson.com/products/')
+        .then((response) => response.json())
+        .then((json) => setCart(json))
+        },[])
+
+        
     const addItem = (item, quantity) => {
         if (isInCart(item.id)) {
-            let posicion = cart.findIndex(x=>x.id===item.id);
-            cart[posicion].quantity+=quantity;
-            setCart([...cart]);
+            let posicion = productos.findIndex(x=>x.id===item.id);
+            productos[posicion].quantity+=quantity;
+            setCart([...productos]);
         }else{
-            setCart([...cart,{...item,quantity:quantity}]);
+            setCart([...productos,{...item,quantity:quantity}]);
         }
     }
 
     const removeItem = (id) => {
-        const productos = cart.filter(x =>x.id !== id);
+        const productos = productos.filter(x =>x.id !== id);
         setCart(productos); 
     }
 
@@ -27,19 +34,19 @@ const CartContextProvider = ({children}) => {
     }
 
     const isInCart = (id) => {
-        return cart.some(x => x.id === id);
+        return productos.some(x => x.id === id);
     }
 
     const cartTotals = () => {
-        return cart.reduce((total,item)=>total+=item.quantity,0)
+        return productos.reduce((total,item)=>total+=item.quantity,0)
     }
 
     const sumaTotals = () => {
-        return cart.reduce((total,item)=>total+=item.quantity*item.Precio,0)
+        return productos.reduce((total,item)=>total+=item.quantity*item.Precio,0)
     }
 
     return (
-        <CartContext.Provider value={{cart, addItem, removeItem, clearCart, cartTotals, sumaTotals}}>
+        <CartContext.Provider value={{productos, addItem, removeItem, clearCart, cartTotals, sumaTotals}}>
             {children}
         </CartContext.Provider>
     )
