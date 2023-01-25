@@ -32,7 +32,8 @@ const ItemDetailContainer = ({ title, description, category, thumbnail, id, pric
                 <CardActions>
 
 
-            <Link to={`/productos/${id}`}>
+            <Link to={`/productos/${id}`}
+            productos={productos}>
             <Button  variant="contained"> Ver</Button>
             </Link>
             <Button  variant="button"> Add to Cart</Button>

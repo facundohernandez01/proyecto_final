@@ -15,11 +15,10 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const ItemDetail = () => {
+const ItemDetail = ({productos}) => {
   const { id } = useParams();
   const {addItem} = useContext(CartContext);
   const [producto, setProducto] = useState({ products: [] })
-
 
 
   useEffect(() => {
@@ -29,7 +28,7 @@ const ItemDetail = () => {
   },[id])  
 
   const onAdd = (quantity) =>{
-    addItem(id, quantity);
+    addItem(productos, quantity);
   }
 
   return (
